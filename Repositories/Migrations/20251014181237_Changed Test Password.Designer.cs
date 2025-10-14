@@ -3,17 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repositories.Context;
 
 #nullable disable
 
-namespace Blazor.Migrations
+namespace Repositories.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251014181237_Changed Test Password")]
+    partial class ChangedTestPassword
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -222,33 +225,29 @@ namespace Blazor.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f08a07b9-dc75-4f07-ae2a-97269e83921a",
+                            Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "010cb3da-f3ae-4036-b5a8-dd479a824266",
-                            Email = "user1@test.com",
+                            ConcurrencyStamp = "98b2f43a-a3d6-4c62-a493-9f3b2fd375f9",
+                            Email = "",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            NormalizedEmail = "USER1@TEST.COM",
-                            NormalizedUserName = "USER1@TEST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHjfRhjudZ58e9l68805Kt2MWgGql+0kpwxgtQ+aeVEXB8+H6PjpHLHc/9rNfASUNw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJ16bOx5D9gyK3OVIvtTMcIs5/yuVROsx2ggVTpe8ALLZQbo4FcyjtP5qfzd25byhA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "715e0fa1-26d8-4190-8f47-914f0308db25",
+                            SecurityStamp = "4f60f177-0ade-4b62-addf-ea9e2ab61df7",
                             TwoFactorEnabled = false,
                             UserName = "user1@test.com"
                         },
                         new
                         {
-                            Id = "46dfa17d-7cc3-4604-9b17-1b9e00d9757f",
+                            Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0344ca0a-3358-426e-9a33-1ea86bb99a78",
-                            Email = "user2@test.com",
+                            ConcurrencyStamp = "8316ac3a-9ba5-4e2b-8a41-f61a13efad07",
+                            Email = "",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            NormalizedEmail = "USER2@TEST.COM",
-                            NormalizedUserName = "USER2@TEST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMx1LOfXpQh0PSZIoln7BLNcBtiqMu4nX27cjcZznkzAtpJycuEpdGd0o3l/bLMVPQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJ85ZMvjlYPPdpWU2RpJu11MHxmQDYQxY6AVoB8d1+fs/nkX14dXTYvXlIQV/vbIoA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a48cc075-f1dd-45a5-a5f5-38f1313b196a",
+                            SecurityStamp = "3c242e31-ea9b-40f4-a20b-eb197305251a",
                             TwoFactorEnabled = false,
                             UserName = "user2@test.com"
                         });

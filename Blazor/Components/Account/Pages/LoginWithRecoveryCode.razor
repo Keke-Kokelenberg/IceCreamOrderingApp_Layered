@@ -2,10 +2,10 @@
 
 @using System.ComponentModel.DataAnnotations
 @using Microsoft.AspNetCore.Identity
-@using Blazor.Data
+@using Repositories.Entities
 
-@inject SignInManager<User> SignInManager
-@inject UserManager<User> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 @inject IdentityRedirectManager RedirectManager
 @inject ILogger<LoginWithRecoveryCode> Logger
 
@@ -35,7 +35,7 @@
 
 @code {
     private string? message;
-    private User user = default!;
+    private ApplicationUser _applicationUser = default!;
 
     [SupplyParameterFromForm] private InputModel Input { get; set; } = new();
 
@@ -43,9 +43,9 @@
 
     protected override async Task OnInitializedAsync()
     {
-        // Ensure the user has gone through the username & password screen first
-        user = await SignInManager.GetTwoFactorAuthenticationUserAsync() ??
-               throw new InvalidOperationException("Unable to load two-factor authentication user.");
+        // Ensure the _applicationUser has gone through the username & password screen first
+        _applicationUser = await SignInManager.GetTwoFactorAuthenticationUserAsync() ??
+               throw new InvalidOperationException("Unable to load two-factor authentication _applicationUser.");
     }
 
     private async Task OnValidSubmitAsync()
@@ -54,21 +54,21 @@
 
         var result = await SignInManager.TwoFactorRecoveryCodeSignInAsync(recoveryCode);
 
-        var userId = await UserManager.GetUserIdAsync(user);
+        var userId = await UserManager.GetUserIdAsync(_applicationUser);
 
         if (result.Succeeded)
         {
-            Logger.LogInformation("User with ID '{UserId}' logged in with a recovery code.", userId);
+            Logger.LogInformation("ApplicationUser with ID '{UserId}' logged in with a recovery code.", userId);
             RedirectManager.RedirectTo(ReturnUrl);
         }
         else if (result.IsLockedOut)
         {
-            Logger.LogWarning("User account locked out.");
+            Logger.LogWarning("ApplicationUser account locked out.");
             RedirectManager.RedirectTo("Account/Lockout");
         }
         else
         {
-            Logger.LogWarning("Invalid recovery code entered for user with ID '{UserId}' ", userId);
+            Logger.LogWarning("Invalid recovery code entered for _applicationUser with ID '{UserId}' ", userId);
             message = "Error: Invalid recovery code entered.";
         }
     }

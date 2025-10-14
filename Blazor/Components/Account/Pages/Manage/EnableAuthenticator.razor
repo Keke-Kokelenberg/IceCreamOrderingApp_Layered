@@ -5,9 +5,9 @@
 @using System.Text
 @using System.Text.Encodings.Web
 @using Microsoft.AspNetCore.Identity
-@using Blazor.Data
+@using Repositories.Entities
 
-@inject UserManager<User> UserManager
+@inject UserManager<ApplicationUser> UserManager
 @inject IdentityUserAccessor UserAccessor
 @inject UrlEncoder UrlEncoder
 @inject IdentityRedirectManager RedirectManager
@@ -70,7 +70,7 @@ else
     private const string AuthenticatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
 
     private string? message;
-    private User user = default!;
+    private ApplicationUser _applicationUser = default!;
     private string? sharedKey;
     private string? authenticatorUri;
     private IEnumerable<string>? recoveryCodes;
@@ -81,9 +81,9 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        user = await UserAccessor.GetRequiredUserAsync(HttpContext);
+        _applicationUser = await UserAccessor.GetRequiredUserAsync(HttpContext);
 
-        await LoadSharedKeyAndQrCodeUriAsync(user);
+        await LoadSharedKeyAndQrCodeUriAsync(_applicationUser);
     }
 
     private async Task OnValidSubmitAsync()
@@ -92,7 +92,7 @@ else
         var verificationCode = Input.Code.Replace(" ", string.Empty).Replace("-", string.Empty);
 
         var is2faTokenValid = await UserManager.VerifyTwoFactorTokenAsync(
-            user, UserManager.Options.Tokens.AuthenticatorTokenProvider, verificationCode);
+            _applicationUser, UserManager.Options.Tokens.AuthenticatorTokenProvider, verificationCode);
 
         if (!is2faTokenValid)
         {
@@ -100,15 +100,15 @@ else
             return;
         }
 
-        await UserManager.SetTwoFactorEnabledAsync(user, true);
-        var userId = await UserManager.GetUserIdAsync(user);
-        Logger.LogInformation("User with ID '{UserId}' has enabled 2FA with an authenticator app.", userId);
+        await UserManager.SetTwoFactorEnabledAsync(_applicationUser, true);
+        var userId = await UserManager.GetUserIdAsync(_applicationUser);
+        Logger.LogInformation("ApplicationUser with ID '{UserId}' has enabled 2FA with an authenticator app.", userId);
 
         message = "Your authenticator app has been verified.";
 
-        if (await UserManager.CountRecoveryCodesAsync(user) == 0)
+        if (await UserManager.CountRecoveryCodesAsync(_applicationUser) == 0)
         {
-            recoveryCodes = await UserManager.GenerateNewTwoFactorRecoveryCodesAsync(user, 10);
+            recoveryCodes = await UserManager.GenerateNewTwoFactorRecoveryCodesAsync(_applicationUser, 10);
         }
         else
         {
@@ -116,19 +116,19 @@ else
         }
     }
 
-    private async ValueTask LoadSharedKeyAndQrCodeUriAsync(User user)
+    private async ValueTask LoadSharedKeyAndQrCodeUriAsync(ApplicationUser applicationUser)
     {
         // Load the authenticator key & QR code URI to display on the form
-        var unformattedKey = await UserManager.GetAuthenticatorKeyAsync(user);
+        var unformattedKey = await UserManager.GetAuthenticatorKeyAsync(applicationUser);
         if (string.IsNullOrEmpty(unformattedKey))
         {
-            await UserManager.ResetAuthenticatorKeyAsync(user);
-            unformattedKey = await UserManager.GetAuthenticatorKeyAsync(user);
+            await UserManager.ResetAuthenticatorKeyAsync(applicationUser);
+            unformattedKey = await UserManager.GetAuthenticatorKeyAsync(applicationUser);
         }
 
         sharedKey = FormatKey(unformattedKey!);
 
-        var email = await UserManager.GetEmailAsync(user);
+        var email = await UserManager.GetEmailAsync(applicationUser);
         authenticatorUri = GenerateQrCodeUri(email!, unformattedKey!);
     }
 

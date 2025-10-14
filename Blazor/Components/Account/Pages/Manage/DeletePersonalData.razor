@@ -2,10 +2,10 @@
 
 @using System.ComponentModel.DataAnnotations
 @using Microsoft.AspNetCore.Identity
-@using Blazor.Data
+@using Repositories.Entities
 
-@inject UserManager<User> UserManager
-@inject SignInManager<User> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
 @inject IdentityUserAccessor UserAccessor
 @inject IdentityRedirectManager RedirectManager
 @inject ILogger<DeletePersonalData> Logger
@@ -23,7 +23,7 @@
 </div>
 
 <div>
-    <EditForm Model="Input" FormName="delete-user" OnValidSubmit="OnValidSubmitAsync" method="post">
+    <EditForm Model="Input" FormName="delete-_applicationUser" OnValidSubmit="OnValidSubmitAsync" method="post">
         <DataAnnotationsValidator/>
         <ValidationSummary class="text-danger" role="alert"/>
         @if (requirePassword)
@@ -40,7 +40,7 @@
 
 @code {
     private string? message;
-    private User user = default!;
+    private ApplicationUser _applicationUser = default!;
     private bool requirePassword;
 
     [CascadingParameter] private HttpContext HttpContext { get; set; } = default!;
@@ -50,28 +50,28 @@
     protected override async Task OnInitializedAsync()
     {
         Input ??= new();
-        user = await UserAccessor.GetRequiredUserAsync(HttpContext);
-        requirePassword = await UserManager.HasPasswordAsync(user);
+        _applicationUser = await UserAccessor.GetRequiredUserAsync(HttpContext);
+        requirePassword = await UserManager.HasPasswordAsync(_applicationUser);
     }
 
     private async Task OnValidSubmitAsync()
     {
-        if (requirePassword && !await UserManager.CheckPasswordAsync(user, Input.Password))
+        if (requirePassword && !await UserManager.CheckPasswordAsync(_applicationUser, Input.Password))
         {
             message = "Error: Incorrect password.";
             return;
         }
 
-        var result = await UserManager.DeleteAsync(user);
+        var result = await UserManager.DeleteAsync(_applicationUser);
         if (!result.Succeeded)
         {
-            throw new InvalidOperationException("Unexpected error occurred deleting user.");
+            throw new InvalidOperationException("Unexpected error occurred deleting _applicationUser.");
         }
 
         await SignInManager.SignOutAsync();
 
-        var userId = await UserManager.GetUserIdAsync(user);
-        Logger.LogInformation("User with ID '{UserId}' deleted themselves.", userId);
+        var userId = await UserManager.GetUserIdAsync(_applicationUser);
+        Logger.LogInformation("ApplicationUser with ID '{UserId}' deleted themselves.", userId);
 
         RedirectManager.RedirectToCurrentPage();
     }

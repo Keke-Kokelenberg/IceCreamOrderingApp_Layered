@@ -1,9 +1,9 @@
 ﻿@page "/Account/Manage/GenerateRecoveryCodes"
 
 @using Microsoft.AspNetCore.Identity
-@using Blazor.Data
+@using Repositories.Entities
 
-@inject UserManager<User> UserManager
+@inject UserManager<ApplicationUser> UserManager
 @inject IdentityUserAccessor UserAccessor
 @inject IdentityRedirectManager RedirectManager
 @inject ILogger<GenerateRecoveryCodes> Logger
@@ -40,29 +40,29 @@ else
 
 @code {
     private string? message;
-    private User user = default!;
+    private ApplicationUser _applicationUser = default!;
     private IEnumerable<string>? recoveryCodes;
 
     [CascadingParameter] private HttpContext HttpContext { get; set; } = default!;
 
     protected override async Task OnInitializedAsync()
     {
-        user = await UserAccessor.GetRequiredUserAsync(HttpContext);
+        _applicationUser = await UserAccessor.GetRequiredUserAsync(HttpContext);
 
-        var isTwoFactorEnabled = await UserManager.GetTwoFactorEnabledAsync(user);
+        var isTwoFactorEnabled = await UserManager.GetTwoFactorEnabledAsync(_applicationUser);
         if (!isTwoFactorEnabled)
         {
-            throw new InvalidOperationException("Cannot generate recovery codes for user because they do not have 2FA enabled.");
+            throw new InvalidOperationException("Cannot generate recovery codes for _applicationUser because they do not have 2FA enabled.");
         }
     }
 
     private async Task OnSubmitAsync()
     {
-        var userId = await UserManager.GetUserIdAsync(user);
-        recoveryCodes = await UserManager.GenerateNewTwoFactorRecoveryCodesAsync(user, 10);
+        var userId = await UserManager.GetUserIdAsync(_applicationUser);
+        recoveryCodes = await UserManager.GenerateNewTwoFactorRecoveryCodesAsync(_applicationUser, 10);
         message = "You have generated new recovery codes.";
 
-        Logger.LogInformation("User with ID '{UserId}' has generated new 2FA recovery codes.", userId);
+        Logger.LogInformation("ApplicationUser with ID '{UserId}' has generated new 2FA recovery codes.", userId);
     }
 
 }
