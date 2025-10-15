@@ -5,6 +5,8 @@ using Blazor.Components;
 using Blazor.Components.Account;
 using Repositories.Context;
 using Repositories.Entities;
+using Repositories.Repositories;
+using Services;
 
 namespace Blazor;
 
@@ -42,6 +44,9 @@ public class Program
             .AddDefaultTokenProviders();
 
         builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
+
+        builder.Services.AddTransient<IVendorRepository, VendorRepository>();
+        builder.Services.AddTransient<IVendorService, VendorService>();
 
         var app = builder.Build();
 

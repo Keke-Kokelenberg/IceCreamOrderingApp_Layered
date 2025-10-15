@@ -1,0 +1,14 @@
+@page "/Vendors"
+
+<h1>Vendors</h1>
+@if (VendorList.Count == 0)
+{
+    <p>@_message</p>
+}
+else
+{
+    @foreach (var vendor in VendorList)
+    {
+        <p>@vendor.Name</p>   
+    }
+}
