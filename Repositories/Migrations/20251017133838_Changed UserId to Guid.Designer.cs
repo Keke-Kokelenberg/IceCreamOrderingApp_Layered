@@ -3,17 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repositories.Context;
 
 #nullable disable
 
-namespace Blazor.Migrations
+namespace Repositories.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251017133838_Changed UserId to Guid")]
+    partial class ChangedUserIdtoGuid
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -222,33 +225,33 @@ namespace Blazor.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3d63bf60-5c06-477e-bed8-1b7a01e878cb",
+                            Id = "7ad6fdae-8d0b-4150-a47d-c56007182b28",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "08cc6e35-06b7-4d1e-880b-7c952b9b3dbe",
+                            ConcurrencyStamp = "a6acd87a-effa-4861-906a-3ee9e8ad2de2",
                             Email = "user1@test.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER1@TEST.COM",
                             NormalizedUserName = "USER1@TEST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEL4Kzeab4miXgw/5Y9KYCtE7hyHig4219dw62tbaFGoYPm9GI0W44rwtwYDYIwFoXA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECGEqtgYnR/vGLvOr2hPgVNkGySxYD1/J3EDUFYOkB12JvT4rSzLUCZm0+EWXqDJrw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a337cb65-4f37-4482-9754-a9a39fdf9cb1",
+                            SecurityStamp = "3a2b42a8-20b3-4a5a-9b78-fc78bd72abdc",
                             TwoFactorEnabled = false,
                             UserName = "user1@test.com"
                         },
                         new
                         {
-                            Id = "b37e622c-5484-4af8-83c0-1e7a75b68320",
+                            Id = "42529bf2-e359-41c7-8bb1-4332c853c750",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "54363a81-89a1-4fba-bf0e-c2889ec07891",
+                            ConcurrencyStamp = "8387ee9f-0767-4f6b-8e45-e35829bb48a0",
                             Email = "user2@test.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER2@TEST.COM",
                             NormalizedUserName = "USER2@TEST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOUn1WEr1M0cPP76qGgIi6+3cpWCNVdO2NHSDvhDBeK1MoMLA98pN7x3SQMAs9g/WQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOo/FntJOek2lK6BY2HSXwdrMI68qxeLEaPaMBn04MPSPNcNwuBcnd8T2HymmfRAEw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "adccb01c-e459-4c85-bc84-c7a02ca6a3f8",
+                            SecurityStamp = "c293ecbe-ac3a-4bc8-9770-ad11cbda6b77",
                             TwoFactorEnabled = false,
                             UserName = "user2@test.com"
                         });
@@ -812,9 +815,8 @@ namespace Blazor.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("int")
+                        .HasDefaultValueSql("NEWID()");
 
                     b.Property<DateTime>("OrderDate")
                         .ValueGeneratedOnAdd()
@@ -828,14 +830,9 @@ namespace Blazor.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("VendorId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("UserId1");
-
-                    b.HasIndex("VendorId");
 
                     b.ToTable("Orders", (string)null);
                 });
@@ -1110,21 +1107,13 @@ namespace Blazor.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Repositories.Entities.Vendor", "Vendor")
-                        .WithMany("Orders")
-                        .HasForeignKey("VendorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("User");
-
-                    b.Navigation("Vendor");
                 });
 
             modelBuilder.Entity("Repositories.Entities.OrderLine", b =>
                 {
                     b.HasOne("Repositories.Entities.IceCream", "IceCream")
-                        .WithMany("OrderLines")
+                        .WithMany()
                         .HasForeignKey("IceCreamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1140,11 +1129,6 @@ namespace Blazor.Migrations
                     b.Navigation("Order");
                 });
 
-            modelBuilder.Entity("Repositories.Entities.IceCream", b =>
-                {
-                    b.Navigation("OrderLines");
-                });
-
             modelBuilder.Entity("Repositories.Entities.Order", b =>
                 {
                     b.Navigation("OrderLines");
@@ -1153,8 +1137,6 @@ namespace Blazor.Migrations
             modelBuilder.Entity("Repositories.Entities.Vendor", b =>
                 {
                     b.Navigation("IceCreamFlavors");
-
-                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

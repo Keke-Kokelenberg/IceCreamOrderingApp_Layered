@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 namespace Repositories.Entities;
 
 public class Vendor
@@ -11,5 +14,34 @@ public class Vendor
     public string Email { get; set; }
     public string? Website { get; set; }
     
+    public List<Order> Orders { get; set; }
+    
     public List<IceCream> IceCreamFlavors { get; set; }
+}
+
+public class VendorEntityTypeConfiguration : IEntityTypeConfiguration<Vendor>
+{
+    public void Configure(EntityTypeBuilder<Vendor> builder)
+    {
+        builder
+            .ToTable("Vendors");
+        
+        builder
+            .HasKey(vendor => vendor.Id);
+        
+        builder
+            .Property(vendor => vendor.Id)
+            .IsRequired()
+            .ValueGeneratedOnAdd();
+        
+        builder
+            .HasMany(vendor => vendor.Orders)
+            .WithOne(order => order.Vendor)
+            .HasForeignKey(order => order.VendorId);
+        
+        builder
+            .HasMany(vendor => vendor.IceCreamFlavors)
+            .WithOne(iceCream => iceCream.Vendor)
+            .HasForeignKey(iceCream => iceCream.VendorId);
+    }
 }

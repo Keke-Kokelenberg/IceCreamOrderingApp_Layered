@@ -3,17 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repositories.Context;
 
 #nullable disable
 
-namespace Blazor.Migrations
+namespace Repositories.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251017193755_Added explicit Entity relationships")]
+    partial class AddedexplicitEntityrelationships
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -222,33 +225,33 @@ namespace Blazor.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3d63bf60-5c06-477e-bed8-1b7a01e878cb",
+                            Id = "7a9fd4e8-e423-4317-b7f0-027c52b9597c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "08cc6e35-06b7-4d1e-880b-7c952b9b3dbe",
+                            ConcurrencyStamp = "310c4f3d-7260-4dbf-a724-1125396933af",
                             Email = "user1@test.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER1@TEST.COM",
                             NormalizedUserName = "USER1@TEST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEL4Kzeab4miXgw/5Y9KYCtE7hyHig4219dw62tbaFGoYPm9GI0W44rwtwYDYIwFoXA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGxzgP3stsGnt+Wjcj5DBA8dUozjCOsVFnYgzW2BGBbif/qjmJU+x3cvywyM27CmuQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a337cb65-4f37-4482-9754-a9a39fdf9cb1",
+                            SecurityStamp = "719b7447-7793-4675-9ee5-50f8980aeee7",
                             TwoFactorEnabled = false,
                             UserName = "user1@test.com"
                         },
                         new
                         {
-                            Id = "b37e622c-5484-4af8-83c0-1e7a75b68320",
+                            Id = "64118f9c-e311-4aab-8554-5694cf3b40bd",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "54363a81-89a1-4fba-bf0e-c2889ec07891",
+                            ConcurrencyStamp = "38639097-f24e-4ebb-98fe-005a108a68f8",
                             Email = "user2@test.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER2@TEST.COM",
                             NormalizedUserName = "USER2@TEST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOUn1WEr1M0cPP76qGgIi6+3cpWCNVdO2NHSDvhDBeK1MoMLA98pN7x3SQMAs9g/WQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELZVGj0eWZFox6dqYlG3JLHadgQrVo32DKYytXxnyfLHqLeJEbbWVufVIwav0N6DiA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "adccb01c-e459-4c85-bc84-c7a02ca6a3f8",
+                            SecurityStamp = "8df7e20d-c88f-4194-8f1e-c9f095f917ed",
                             TwoFactorEnabled = false,
                             UserName = "user2@test.com"
                         });
@@ -812,9 +815,8 @@ namespace Blazor.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("int")
+                        .HasDefaultValueSql("NEWID()");
 
                     b.Property<DateTime>("OrderDate")
                         .ValueGeneratedOnAdd()

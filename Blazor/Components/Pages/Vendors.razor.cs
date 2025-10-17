@@ -13,7 +13,14 @@ public partial class Vendors : ComponentBase
     
     protected override async Task OnInitializedAsync()
     {
-        VendorList = await VendorService.GetAllVendorsAsync();
+        try
+        {
+            VendorList = await VendorService.GetAllVendorsAsync();
+        }
+        catch (Exception e)
+        {
+            _message = e.Message;       
+        }
 
         if (VendorList.Count == 0)
         {

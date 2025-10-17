@@ -3,17 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repositories.Context;
 
 #nullable disable
 
-namespace Blazor.Migrations
+namespace Repositories.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251017133436_Added Order and Orderlines, and extra configurations to all Entities")]
+    partial class AddedOrderandOrderlinesandextraconfigurationstoallEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -222,33 +225,33 @@ namespace Blazor.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3d63bf60-5c06-477e-bed8-1b7a01e878cb",
+                            Id = "15413034-fd6d-4ec9-8628-18e66f2e5fd9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "08cc6e35-06b7-4d1e-880b-7c952b9b3dbe",
+                            ConcurrencyStamp = "6a177b44-4383-4059-8ad6-e486e7e57248",
                             Email = "user1@test.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER1@TEST.COM",
                             NormalizedUserName = "USER1@TEST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEL4Kzeab4miXgw/5Y9KYCtE7hyHig4219dw62tbaFGoYPm9GI0W44rwtwYDYIwFoXA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBQWRY7WFKQE9ZnHJ20FC0XRgW9OQrwK6Bm4O/bcvW5+95agpEdF421vvm2jGXpo7w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a337cb65-4f37-4482-9754-a9a39fdf9cb1",
+                            SecurityStamp = "06177ee5-8a96-4fd1-a577-1335d3c23fb4",
                             TwoFactorEnabled = false,
                             UserName = "user1@test.com"
                         },
                         new
                         {
-                            Id = "b37e622c-5484-4af8-83c0-1e7a75b68320",
+                            Id = "d3b0cb11-232d-43ae-a33e-02b8c2d37d22",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "54363a81-89a1-4fba-bf0e-c2889ec07891",
+                            ConcurrencyStamp = "50fa13c8-baeb-4625-b40f-47b03da2d8f0",
                             Email = "user2@test.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER2@TEST.COM",
                             NormalizedUserName = "USER2@TEST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOUn1WEr1M0cPP76qGgIi6+3cpWCNVdO2NHSDvhDBeK1MoMLA98pN7x3SQMAs9g/WQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFhmyxhh0wSosfOSc7r4r3MB5WOg5sNV5ueeIY0ufAYPlC5/G5VWpsBZDW6KEmSNDw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "adccb01c-e459-4c85-bc84-c7a02ca6a3f8",
+                            SecurityStamp = "69215c19-73d0-4a12-b6c4-ff19b1f0e057",
                             TwoFactorEnabled = false,
                             UserName = "user2@test.com"
                         });
@@ -821,21 +824,16 @@ namespace Blazor.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GETDATE()");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserId1")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("VendorId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("UserId1");
-
-                    b.HasIndex("VendorId");
 
                     b.ToTable("Orders", (string)null);
                 });
@@ -1110,21 +1108,13 @@ namespace Blazor.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Repositories.Entities.Vendor", "Vendor")
-                        .WithMany("Orders")
-                        .HasForeignKey("VendorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("User");
-
-                    b.Navigation("Vendor");
                 });
 
             modelBuilder.Entity("Repositories.Entities.OrderLine", b =>
                 {
                     b.HasOne("Repositories.Entities.IceCream", "IceCream")
-                        .WithMany("OrderLines")
+                        .WithMany()
                         .HasForeignKey("IceCreamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1140,11 +1130,6 @@ namespace Blazor.Migrations
                     b.Navigation("Order");
                 });
 
-            modelBuilder.Entity("Repositories.Entities.IceCream", b =>
-                {
-                    b.Navigation("OrderLines");
-                });
-
             modelBuilder.Entity("Repositories.Entities.Order", b =>
                 {
                     b.Navigation("OrderLines");
@@ -1153,8 +1138,6 @@ namespace Blazor.Migrations
             modelBuilder.Entity("Repositories.Entities.Vendor", b =>
                 {
                     b.Navigation("IceCreamFlavors");
-
-                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }
