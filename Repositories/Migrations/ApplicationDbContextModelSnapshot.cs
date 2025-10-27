@@ -8,7 +8,7 @@ using Repositories.Context;
 
 #nullable disable
 
-namespace Blazor.Migrations
+namespace Repositories.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -222,33 +222,33 @@ namespace Blazor.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3d63bf60-5c06-477e-bed8-1b7a01e878cb",
+                            Id = "ddb914fd-d9e0-4fb8-84d6-12da4d0233fc",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "08cc6e35-06b7-4d1e-880b-7c952b9b3dbe",
+                            ConcurrencyStamp = "5a3ca6e8-f6bc-423a-b44f-d4f26c141060",
                             Email = "user1@test.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER1@TEST.COM",
                             NormalizedUserName = "USER1@TEST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEL4Kzeab4miXgw/5Y9KYCtE7hyHig4219dw62tbaFGoYPm9GI0W44rwtwYDYIwFoXA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECGgx+3FZTOi6zjPj6+wJCQ+Iq9Vr2szpYSXk/bDpKzN8ZX8PzFrBDK/TuEc+6KG6Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a337cb65-4f37-4482-9754-a9a39fdf9cb1",
+                            SecurityStamp = "edcc480c-6a2d-4bcc-94b2-4878f6d845cb",
                             TwoFactorEnabled = false,
                             UserName = "user1@test.com"
                         },
                         new
                         {
-                            Id = "b37e622c-5484-4af8-83c0-1e7a75b68320",
+                            Id = "ba7396a8-2b59-457f-a8f8-496eba4151f6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "54363a81-89a1-4fba-bf0e-c2889ec07891",
+                            ConcurrencyStamp = "573ceb19-f6a7-43f6-b9eb-a762c8f956b4",
                             Email = "user2@test.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER2@TEST.COM",
                             NormalizedUserName = "USER2@TEST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOUn1WEr1M0cPP76qGgIi6+3cpWCNVdO2NHSDvhDBeK1MoMLA98pN7x3SQMAs9g/WQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENgBaWclvmRinJxmwlgoXxC69gr1YMELtavBH6mH9B30HW3TiyTyBYcN1giuVDNbQQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "adccb01c-e459-4c85-bc84-c7a02ca6a3f8",
+                            SecurityStamp = "b283a047-4c23-4c61-bbcf-5dfe7376f732",
                             TwoFactorEnabled = false,
                             UserName = "user2@test.com"
                         });
@@ -1132,7 +1132,7 @@ namespace Blazor.Migrations
                     b.HasOne("Repositories.Entities.Order", "Order")
                         .WithMany("OrderLines")
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("IceCream");

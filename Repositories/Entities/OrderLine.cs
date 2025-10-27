@@ -39,7 +39,8 @@ public class OrderLineEntityTypeConfiguration : IEntityTypeConfiguration<OrderLi
         builder
             .HasOne(orderLine => orderLine.Order)
             .WithMany(order => order.OrderLines)
-            .HasForeignKey(orderLine => orderLine.OrderId);
+            .HasForeignKey(orderLine => orderLine.OrderId)
+            .OnDelete(DeleteBehavior.Restrict);
         
         builder
             .HasOne(orderLine => orderLine.IceCream)

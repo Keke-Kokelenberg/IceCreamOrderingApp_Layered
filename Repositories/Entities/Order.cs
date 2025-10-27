@@ -54,6 +54,12 @@ public class OrderEntityTypeConfiguration : IEntityTypeConfiguration<Order>
             .HasDefaultValueSql("GETDATE()");
         
         builder
+            .HasMany(order => order.OrderLines)
+            .WithOne(orderLine => orderLine.Order)
+            .HasForeignKey(orderLine => orderLine.OrderId)
+            .OnDelete(DeleteBehavior.Restrict);
+        
+        builder
             .Ignore(order => order.TotalPrice);
     }
 }

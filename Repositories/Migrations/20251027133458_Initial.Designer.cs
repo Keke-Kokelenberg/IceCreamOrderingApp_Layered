@@ -12,8 +12,8 @@ using Repositories.Context;
 namespace Repositories.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251017193755_Added explicit Entity relationships")]
-    partial class AddedexplicitEntityrelationships
+    [Migration("20251027133458_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -225,33 +225,33 @@ namespace Repositories.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7a9fd4e8-e423-4317-b7f0-027c52b9597c",
+                            Id = "ddb914fd-d9e0-4fb8-84d6-12da4d0233fc",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "310c4f3d-7260-4dbf-a724-1125396933af",
+                            ConcurrencyStamp = "5a3ca6e8-f6bc-423a-b44f-d4f26c141060",
                             Email = "user1@test.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER1@TEST.COM",
                             NormalizedUserName = "USER1@TEST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGxzgP3stsGnt+Wjcj5DBA8dUozjCOsVFnYgzW2BGBbif/qjmJU+x3cvywyM27CmuQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECGgx+3FZTOi6zjPj6+wJCQ+Iq9Vr2szpYSXk/bDpKzN8ZX8PzFrBDK/TuEc+6KG6Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "719b7447-7793-4675-9ee5-50f8980aeee7",
+                            SecurityStamp = "edcc480c-6a2d-4bcc-94b2-4878f6d845cb",
                             TwoFactorEnabled = false,
                             UserName = "user1@test.com"
                         },
                         new
                         {
-                            Id = "64118f9c-e311-4aab-8554-5694cf3b40bd",
+                            Id = "ba7396a8-2b59-457f-a8f8-496eba4151f6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "38639097-f24e-4ebb-98fe-005a108a68f8",
+                            ConcurrencyStamp = "573ceb19-f6a7-43f6-b9eb-a762c8f956b4",
                             Email = "user2@test.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER2@TEST.COM",
                             NormalizedUserName = "USER2@TEST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAELZVGj0eWZFox6dqYlG3JLHadgQrVo32DKYytXxnyfLHqLeJEbbWVufVIwav0N6DiA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENgBaWclvmRinJxmwlgoXxC69gr1YMELtavBH6mH9B30HW3TiyTyBYcN1giuVDNbQQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8df7e20d-c88f-4194-8f1e-c9f095f917ed",
+                            SecurityStamp = "b283a047-4c23-4c61-bbcf-5dfe7376f732",
                             TwoFactorEnabled = false,
                             UserName = "user2@test.com"
                         });
@@ -815,8 +815,9 @@ namespace Repositories.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValueSql("NEWID()");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("OrderDate")
                         .ValueGeneratedOnAdd()
@@ -1134,7 +1135,7 @@ namespace Repositories.Migrations
                     b.HasOne("Repositories.Entities.Order", "Order")
                         .WithMany("OrderLines")
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("IceCream");
