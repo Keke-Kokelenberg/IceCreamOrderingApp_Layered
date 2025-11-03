@@ -7,8 +7,23 @@
 }
 else
 {
-    @foreach (var vendor in VendorList)
-    {
-        <p>@vendor.Name</p>   
-    }
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Address</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var vendor in VendorList)
+        {
+            <tr>
+                <td><a href="VendorDetails/@vendor.Id">@vendor.Name</a></td>
+                <td>@vendor.Description</td>
+                <td>@vendor.Address</td>
+            </tr>
+        }
+        </tbody>
+    </table>
 }

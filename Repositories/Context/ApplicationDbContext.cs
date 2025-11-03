@@ -67,6 +67,7 @@ public class ApplicationDbContext: IdentityDbContext<ApplicationUser>
                 {
                     Id = 1,
                     Name = "Ice Cream Paradise",
+                    Description = "A family-friendly ice cream shop offering classic flavors and creative combinations in a tropical-themed setting.",
                     Address = "123 Frost Street, Cooltown, CT 06510",
                     Website = "www.icecreamparadise.com",
                     PhoneNumber = "555-0123",
@@ -76,6 +77,7 @@ public class ApplicationDbContext: IdentityDbContext<ApplicationUser>
                 {
                     Id = 2,
                     Name = "Gelato Dreams",
+                    Description = "Authentic Italian gelato made fresh daily using traditional recipes and the finest imported ingredients.",
                     Address = "456 Scoop Avenue, Freezeville, CT 06511",
                     Website = "www.gelatodreams.com",
                     PhoneNumber = "555-0124",
@@ -85,6 +87,7 @@ public class ApplicationDbContext: IdentityDbContext<ApplicationUser>
                 {
                     Id = 3,
                     Name = "Frosty's Delights",
+                    Description = "A beloved local ice cream parlor serving premium ice cream with a focus on nostalgic flavors and excellent customer service.",
                     Address = "789 Sundae Lane, Chillburg, CT 06512",
                     Website = "www.frostysdelights.com",
                     PhoneNumber = "555-0125",
@@ -94,6 +97,7 @@ public class ApplicationDbContext: IdentityDbContext<ApplicationUser>
                 {
                     Id = 4,
                     Name = "Sweet Scoops Creamery",
+                    Description = "Handcrafted small-batch ice cream featuring innovative flavor combinations and decadent mix-ins.",
                     Address = "321 Sugar Street, Sweetville, CT 06513",
                     Website = "www.sweetscoops.com",
                     PhoneNumber = "555-0126",
@@ -103,6 +107,7 @@ public class ApplicationDbContext: IdentityDbContext<ApplicationUser>
                 {
                     Id = 5,
                     Name = "Artisan Ice Works",
+                    Description = "Gourmet ice cream crafted by expert ice cream makers using unique flavor profiles and locally-sourced ingredients.",
                     Address = "567 Cream Avenue, Artville, CT 06514",
                     Website = "www.artisanice.com",
                     PhoneNumber = "555-0127",
@@ -112,6 +117,7 @@ public class ApplicationDbContext: IdentityDbContext<ApplicationUser>
                 {
                     Id = 6,
                     Name = "Coastal Creamery",
+                    Description = "Ocean-inspired ice cream shop bringing beachside vibes and refreshing tropical flavors to every scoop.",
                     Address = "785 Beach Boulevard, Shoreline, CT 06515",
                     Website = "www.coastalcreamery.com",
                     PhoneNumber = "555-0128",
@@ -121,6 +127,7 @@ public class ApplicationDbContext: IdentityDbContext<ApplicationUser>
                 {
                     Id = 7,
                     Name = "Mountain Peak Ice Cream",
+                    Description = "Adventure-themed ice cream parlor offering hearty flavors perfect for outdoor enthusiasts and nature lovers.",
                     Address = "214 Summit Road, Highland, CT 06516",
                     Website = "www.mountainpeakicecream.com",
                     PhoneNumber = "555-0129",
@@ -130,6 +137,7 @@ public class ApplicationDbContext: IdentityDbContext<ApplicationUser>
                 {
                     Id = 8,
                     Name = "Urban Scoop",
+                    Description = "Modern ice cream shop with a sophisticated atmosphere, serving premium flavors for the cosmopolitan palate.",
                     Address = "433 Downtown Avenue, Cityville, CT 06517",
                     Website = "www.urbanscoop.com",
                     PhoneNumber = "555-0130",
@@ -139,6 +147,7 @@ public class ApplicationDbContext: IdentityDbContext<ApplicationUser>
                 {
                     Id = 9,
                     Name = "Dairy Delight",
+                    Description = "Farm-to-cone ice cream made with fresh dairy from local farms, celebrating simple, wholesome ingredients.",
                     Address = "928 Milk Street, Farmtown, CT 06518",
                     Website = "www.dairydelight.com",
                     PhoneNumber = "555-0131",
@@ -148,6 +157,7 @@ public class ApplicationDbContext: IdentityDbContext<ApplicationUser>
                 {
                     Id = 10,
                     Name = "Vintage Ice Cream Parlor",
+                    Description = "Step back in time at this old-fashioned soda fountain serving classic ice cream treats in a nostalgic setting.",
                     Address = "356 Heritage Lane, Oldtown, CT 06519",
                     Website = "www.vintageicecream.com",
                     PhoneNumber = "555-0132",
@@ -157,6 +167,7 @@ public class ApplicationDbContext: IdentityDbContext<ApplicationUser>
                 {
                     Id = 11,
                     Name = "Fusion Frozen Treats",
+                    Description = "Innovative ice cream shop blending international flavors and culinary techniques for a unique taste experience.",
                     Address = "573 Fusion Boulevard, Innovation City, CT 06520",
                     Website = "www.fusionfrozen.com",
                     PhoneNumber = "555-0133",
@@ -166,6 +177,7 @@ public class ApplicationDbContext: IdentityDbContext<ApplicationUser>
                 {
                     Id = 12,
                     Name = "Nature's Scoop",
+                    Description = "Organic and all-natural ice cream made with sustainably-sourced ingredients and no artificial additives.",
                     Address = "182 Organic Way, Greenvale, CT 06521",
                     Website = "www.naturesscoop.com",
                     PhoneNumber = "555-0134",
@@ -175,6 +187,7 @@ public class ApplicationDbContext: IdentityDbContext<ApplicationUser>
                 {
                     Id = 13,
                     Name = "Carnival Creamery",
+                    Description = "Fun and festive ice cream shop bringing the excitement of the carnival to every colorful and playful flavor.",
                     Address = "742 Festival Street, Funtown, CT 06522",
                     Website = "www.carnivalcreamery.com",
                     PhoneNumber = "555-0135",
@@ -184,6 +197,7 @@ public class ApplicationDbContext: IdentityDbContext<ApplicationUser>
                 {
                     Id = 14,
                     Name = "University Scoops",
+                    Description = "Popular campus hangout serving affordable ice cream favorites and late-night study fuel for students.",
                     Address = "105 Campus Drive, College Town, CT 06523",
                     Website = "www.universityscoops.com",
                     PhoneNumber = "555-0136",
@@ -193,6 +207,7 @@ public class ApplicationDbContext: IdentityDbContext<ApplicationUser>
                 {
                     Id = 15,
                     Name = "Historic Creamery",
+                    Description = "Century-old ice cream institution preserving traditional recipes and serving the community for generations.",
                     Address = "481 Monument Square, Heritage City, CT 06524",
                     Website = "www.historiccreamery.com",
                     PhoneNumber = "555-0137",

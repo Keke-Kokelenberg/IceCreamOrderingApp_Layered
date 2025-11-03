@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repositories.Context;
 
@@ -11,9 +12,11 @@ using Repositories.Context;
 namespace Repositories.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251103140941_Commented out ImageUrl property on Vendor and IceCream Entities")]
+    partial class CommentedoutImageUrlpropertyonVendorandIceCreamEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -222,33 +225,33 @@ namespace Repositories.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2d988e75-bc95-417a-bf2d-852f84536b67",
+                            Id = "b8260f4a-5c52-4a21-b7da-35ba5a4faba8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ca86c17f-120a-4649-9c86-7753dbfb1a62",
+                            ConcurrencyStamp = "1ebe233f-200b-410a-937b-8d5bba248d55",
                             Email = "user1@test.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER1@TEST.COM",
                             NormalizedUserName = "USER1@TEST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEErYOadhxw/WGV5C+5oCSEezgWQz7jkgqTLZv5SaCgNInQAl6OA0E1kAfnBhxGL28A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOfgVuDDQlXygCWUsbb/Ayfjm6Up/rxpNzBFZ9Y2RDU+Sfh1xyHpUw4ah8qdoQ8zGA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e6fa8bb8-fa40-48ce-8df8-c39cbdfa7b20",
+                            SecurityStamp = "61170366-973d-421e-96f8-ab11f30a1ee9",
                             TwoFactorEnabled = false,
                             UserName = "user1@test.com"
                         },
                         new
                         {
-                            Id = "fed48273-2fa8-4ec4-9ce7-74e7ba7b08f4",
+                            Id = "223c9852-88b2-4f5c-845b-8d61eec95b30",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e3a91bbb-32e4-4edd-a4f9-a93b96828519",
+                            ConcurrencyStamp = "d20366df-4d94-40f1-9949-ca4676c868aa",
                             Email = "user2@test.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER2@TEST.COM",
                             NormalizedUserName = "USER2@TEST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAECzUqJyTI//fZk5qh4r9FNbuWtcoTY3Ska2SebiCPczVmRJY7js95gKuqs2gt/YrYA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEA3ISDWyCKhRNhlnzUP7B6nurWdyE1Edf4HJ1GMjyD1Y9WhdVt9C8H7RJUzXZqg8NQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b3bcf240-9817-42b9-af63-d00f7ef3a3bd",
+                            SecurityStamp = "17ce83b5-feab-4c52-9f7b-502ec9ad9968",
                             TwoFactorEnabled = false,
                             UserName = "user2@test.com"
                         });
@@ -901,7 +904,6 @@ namespace Repositories.Migrations
                         {
                             Id = 1,
                             Address = "123 Frost Street, Cooltown, CT 06510",
-                            Description = "A family-friendly ice cream shop offering classic flavors and creative combinations in a tropical-themed setting.",
                             Email = "contact@icecreamparadise.com",
                             Name = "Ice Cream Paradise",
                             PhoneNumber = "555-0123",
@@ -911,7 +913,6 @@ namespace Repositories.Migrations
                         {
                             Id = 2,
                             Address = "456 Scoop Avenue, Freezeville, CT 06511",
-                            Description = "Authentic Italian gelato made fresh daily using traditional recipes and the finest imported ingredients.",
                             Email = "info@gelatodreams.com",
                             Name = "Gelato Dreams",
                             PhoneNumber = "555-0124",
@@ -921,7 +922,6 @@ namespace Repositories.Migrations
                         {
                             Id = 3,
                             Address = "789 Sundae Lane, Chillburg, CT 06512",
-                            Description = "A beloved local ice cream parlor serving premium ice cream with a focus on nostalgic flavors and excellent customer service.",
                             Email = "sales@frostysdelights.com",
                             Name = "Frosty's Delights",
                             PhoneNumber = "555-0125",
@@ -931,7 +931,6 @@ namespace Repositories.Migrations
                         {
                             Id = 4,
                             Address = "321 Sugar Street, Sweetville, CT 06513",
-                            Description = "Handcrafted small-batch ice cream featuring innovative flavor combinations and decadent mix-ins.",
                             Email = "hello@sweetscoops.com",
                             Name = "Sweet Scoops Creamery",
                             PhoneNumber = "555-0126",
@@ -941,7 +940,6 @@ namespace Repositories.Migrations
                         {
                             Id = 5,
                             Address = "567 Cream Avenue, Artville, CT 06514",
-                            Description = "Gourmet ice cream crafted by expert ice cream makers using unique flavor profiles and locally-sourced ingredients.",
                             Email = "info@artisanice.com",
                             Name = "Artisan Ice Works",
                             PhoneNumber = "555-0127",
@@ -951,7 +949,6 @@ namespace Repositories.Migrations
                         {
                             Id = 6,
                             Address = "785 Beach Boulevard, Shoreline, CT 06515",
-                            Description = "Ocean-inspired ice cream shop bringing beachside vibes and refreshing tropical flavors to every scoop.",
                             Email = "info@coastalcreamery.com",
                             Name = "Coastal Creamery",
                             PhoneNumber = "555-0128",
@@ -961,7 +958,6 @@ namespace Repositories.Migrations
                         {
                             Id = 7,
                             Address = "214 Summit Road, Highland, CT 06516",
-                            Description = "Adventure-themed ice cream parlor offering hearty flavors perfect for outdoor enthusiasts and nature lovers.",
                             Email = "contact@mountainpeakicecream.com",
                             Name = "Mountain Peak Ice Cream",
                             PhoneNumber = "555-0129",
@@ -971,7 +967,6 @@ namespace Repositories.Migrations
                         {
                             Id = 8,
                             Address = "433 Downtown Avenue, Cityville, CT 06517",
-                            Description = "Modern ice cream shop with a sophisticated atmosphere, serving premium flavors for the cosmopolitan palate.",
                             Email = "hello@urbanscoop.com",
                             Name = "Urban Scoop",
                             PhoneNumber = "555-0130",
@@ -981,7 +976,6 @@ namespace Repositories.Migrations
                         {
                             Id = 9,
                             Address = "928 Milk Street, Farmtown, CT 06518",
-                            Description = "Farm-to-cone ice cream made with fresh dairy from local farms, celebrating simple, wholesome ingredients.",
                             Email = "sales@dairydelight.com",
                             Name = "Dairy Delight",
                             PhoneNumber = "555-0131",
@@ -991,7 +985,6 @@ namespace Repositories.Migrations
                         {
                             Id = 10,
                             Address = "356 Heritage Lane, Oldtown, CT 06519",
-                            Description = "Step back in time at this old-fashioned soda fountain serving classic ice cream treats in a nostalgic setting.",
                             Email = "parlor@vintageicecream.com",
                             Name = "Vintage Ice Cream Parlor",
                             PhoneNumber = "555-0132",
@@ -1001,7 +994,6 @@ namespace Repositories.Migrations
                         {
                             Id = 11,
                             Address = "573 Fusion Boulevard, Innovation City, CT 06520",
-                            Description = "Innovative ice cream shop blending international flavors and culinary techniques for a unique taste experience.",
                             Email = "info@fusionfrozen.com",
                             Name = "Fusion Frozen Treats",
                             PhoneNumber = "555-0133",
@@ -1011,7 +1003,6 @@ namespace Repositories.Migrations
                         {
                             Id = 12,
                             Address = "182 Organic Way, Greenvale, CT 06521",
-                            Description = "Organic and all-natural ice cream made with sustainably-sourced ingredients and no artificial additives.",
                             Email = "hello@naturesscoop.com",
                             Name = "Nature's Scoop",
                             PhoneNumber = "555-0134",
@@ -1021,7 +1012,6 @@ namespace Repositories.Migrations
                         {
                             Id = 13,
                             Address = "742 Festival Street, Funtown, CT 06522",
-                            Description = "Fun and festive ice cream shop bringing the excitement of the carnival to every colorful and playful flavor.",
                             Email = "fun@carnivalcreamery.com",
                             Name = "Carnival Creamery",
                             PhoneNumber = "555-0135",
@@ -1031,7 +1021,6 @@ namespace Repositories.Migrations
                         {
                             Id = 14,
                             Address = "105 Campus Drive, College Town, CT 06523",
-                            Description = "Popular campus hangout serving affordable ice cream favorites and late-night study fuel for students.",
                             Email = "campus@universityscoops.com",
                             Name = "University Scoops",
                             PhoneNumber = "555-0136",
@@ -1041,7 +1030,6 @@ namespace Repositories.Migrations
                         {
                             Id = 15,
                             Address = "481 Monument Square, Heritage City, CT 06524",
-                            Description = "Century-old ice cream institution preserving traditional recipes and serving the community for generations.",
                             Email = "history@historiccreamery.com",
                             Name = "Historic Creamery",
                             PhoneNumber = "555-0137",
