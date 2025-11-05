@@ -1,0 +1,44 @@
+@page "/VendorDetails/{Id:int}"
+
+<h1>Vendor Details</h1>
+@if (Vendor is null)
+{
+    <p>@_message</p>
+}
+else
+{
+    <h2>@Vendor.Name</h2>
+    <p>@Vendor.Description</p>
+    <p>@Vendor.Address</p>
+    <p>@Vendor.PhoneNumber</p>
+    <p>@Vendor.Email</p>
+    <p>@Vendor.Website</p>
+    <br/>
+    <h2>Ice Cream Flavors</h2>
+    @if (Vendor.IceCreamFlavors.Count == 0)
+    {
+        <p>No ice cream flavors found.</p>
+    }
+    else
+    {
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Flavor</th>
+                <th>Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var flavor in Vendor.IceCreamFlavors)
+            {
+                <tr>
+                    <td>@flavor.Name</td>
+                    <td>@flavor.Price €</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+    <br/>
+    <a href="/Vendors" class="btn btn-secondary">Back to Vendor overview</a>
+}

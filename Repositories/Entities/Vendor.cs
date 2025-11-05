@@ -13,10 +13,10 @@ public class Vendor
     public string? PhoneNumber { get; set; }
     public string Email { get; set; }
     public string? Website { get; set; }
-    
-    public List<Order> Orders { get; set; }
-    
-    public List<IceCream> IceCreamFlavors { get; set; }
+
+    public List<Order> Orders { get; set; } = new List<Order>();
+
+    public List<IceCream> IceCreamFlavors { get; set; } = new List<IceCream>();
 }
 
 public class VendorEntityTypeConfiguration : IEntityTypeConfiguration<Vendor>
