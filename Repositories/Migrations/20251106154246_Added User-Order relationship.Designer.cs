@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repositories.Context;
 
@@ -11,9 +12,11 @@ using Repositories.Context;
 namespace Repositories.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251106154246_Added User-Order relationship")]
+    partial class AddedUserOrderrelationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -222,33 +225,33 @@ namespace Repositories.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0c6acced-767f-442f-8d05-5e5063fd478e",
+                            Id = "a9aff0fc-342b-4733-b42a-955581fa4be4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0689128a-d52b-4421-9af2-f5df6c03ef23",
+                            ConcurrencyStamp = "4c1dfdc4-165c-4f3e-ad24-75e2ec2dc894",
                             Email = "user1@test.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER1@TEST.COM",
                             NormalizedUserName = "USER1@TEST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAECsQBn+tCPOE+fVVVoUHqzvRocLRkNKYnwJlIFoptEcSof2fG7JhoAVO+b0L/Lc55A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKsSvl/ArxKL77re2re/9QcOTu5bEYlqSP85NXvMtqx0p0715Yak+pmtLcl0sM7Mmg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4e66d0b5-2d5c-4828-8506-083ac8978435",
+                            SecurityStamp = "675bf186-4d2b-474b-b497-f39ac8135036",
                             TwoFactorEnabled = false,
                             UserName = "user1@test.com"
                         },
                         new
                         {
-                            Id = "151e5d9a-6238-4054-83fc-3cdf5e2a8705",
+                            Id = "85a40638-0355-4b78-9589-4bf7f470da7b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fc94fe4e-cc76-49cd-bf89-88fffbfd40f3",
+                            ConcurrencyStamp = "8e1b2b57-c277-41bb-aeb6-fc15e25e9d54",
                             Email = "user2@test.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER2@TEST.COM",
                             NormalizedUserName = "USER2@TEST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDYogG5vATAinT2A08zIDhPRmatcyFQG7OxXtGxeX9ghyFgf1UACmvbfNbe2Vtcomg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGghZA0TEapU3HPzV7Qc7ZPxDDduMyrNEAdGB7+AOgJLlMzE08iRap07vKg+xycqGg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9e3eb3b3-4b7b-42ee-b940-d1c7be2f8141",
+                            SecurityStamp = "952daf7e-6dc8-4cb9-af0c-6aaea06e1d9e",
                             TwoFactorEnabled = false,
                             UserName = "user2@test.com"
                         });
@@ -832,22 +835,6 @@ namespace Repositories.Migrations
                     b.HasIndex("VendorId");
 
                     b.ToTable("Orders", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            OrderDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = "0c6acced-767f-442f-8d05-5e5063fd478e",
-                            VendorId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            OrderDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = "0c6acced-767f-442f-8d05-5e5063fd478e",
-                            VendorId = 2
-                        });
                 });
 
             modelBuilder.Entity("Repositories.Entities.OrderLine", b =>
@@ -874,50 +861,6 @@ namespace Repositories.Migrations
                     b.HasIndex("OrderId");
 
                     b.ToTable("OrderLines", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            IceCreamId = 1,
-                            OrderId = 1,
-                            Quantity = 2
-                        },
-                        new
-                        {
-                            Id = 2,
-                            IceCreamId = 2,
-                            OrderId = 1,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            IceCreamId = 4,
-                            OrderId = 1,
-                            Quantity = 3
-                        },
-                        new
-                        {
-                            Id = 4,
-                            IceCreamId = 6,
-                            OrderId = 2,
-                            Quantity = 2
-                        },
-                        new
-                        {
-                            Id = 5,
-                            IceCreamId = 7,
-                            OrderId = 2,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            Id = 6,
-                            IceCreamId = 10,
-                            OrderId = 2,
-                            Quantity = 2
-                        });
                 });
 
             modelBuilder.Entity("Repositories.Entities.Vendor", b =>

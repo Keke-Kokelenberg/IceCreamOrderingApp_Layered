@@ -8,7 +8,7 @@ public class Order
     public int Id { get; set; }
     public DateTime OrderDate { get; set; }
     
-    public Guid UserId { get; set; }
+    public string UserId { get; set; }
     public ApplicationUser User { get; set; }
     
     public int VendorId { get; set; }
@@ -38,9 +38,9 @@ public class OrderEntityTypeConfiguration : IEntityTypeConfiguration<Order>
             .ValueGeneratedOnAdd();
 
         builder
-            .HasOne(order => order.User);
-            // .WithMany(user => user.Orders)
-            // .HasForeignKey(order => order.UserId);
+            .HasOne(order => order.User)
+            .WithMany(user => user.Orders)
+            .HasForeignKey(order => order.UserId);
 
         builder
             .HasOne(order => order.Vendor)

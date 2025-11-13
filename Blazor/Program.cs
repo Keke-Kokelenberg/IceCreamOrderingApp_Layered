@@ -47,6 +47,8 @@ public class Program
 
         builder.Services.AddTransient<IVendorRepository, VendorRepository>();
         builder.Services.AddTransient<IVendorService, VendorService>();
+        builder.Services.AddTransient<IOrderRepository, OrderRepository>();
+        builder.Services.AddTransient<IOrderService, OrderService>();
 
         var app = builder.Build();
 

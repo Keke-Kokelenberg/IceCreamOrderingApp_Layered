@@ -12,6 +12,8 @@ public class ApplicationDbContext: IdentityDbContext<ApplicationUser>
     public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     public DbSet<Vendor> Vendors { get; set; }
     public DbSet<IceCream> IceCreamFlavors { get; set; }
+    public DbSet<Order> Orders { get; set; }
+    public DbSet<OrderLine> OrderLines { get; set; }
     
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
@@ -583,5 +585,74 @@ public class ApplicationDbContext: IdentityDbContext<ApplicationUser>
                 }
             );
         
+        // Orders
+        modelBuilder
+            .Entity<Order>()
+            .HasData(
+                new Order
+                {
+                    Id = 1,
+                    UserId = user1.Id,
+                    VendorId = 1,
+                    
+                },
+                new Order
+                {
+                    Id = 2,
+                    UserId = user1.Id,
+                    VendorId = 2,
+                }
+            );
+
+        // Order Lines
+        modelBuilder
+            .Entity<OrderLine>()
+            .HasData(
+                // Order 1 - Ice Cream Paradise (Vendor 1)
+                new OrderLine
+                {
+                    Id = 1,
+                    OrderId = 1,
+                    IceCreamId = 1, // Vanilla Bean Supreme
+                    Quantity = 2
+                },
+                new OrderLine
+                {
+                    Id = 2,
+                    OrderId = 1,
+                    IceCreamId = 2, // Double Chocolate Fudge
+                    Quantity = 1
+                },
+                new OrderLine
+                {
+                    Id = 3,
+                    OrderId = 1,
+                    IceCreamId = 4, // Cookies and Cream
+                    Quantity = 3
+                },
+                // Order 2 - Gelato Dreams (Vendor 2)
+                new OrderLine
+                {
+                    Id = 4,
+                    OrderId = 2,
+                    IceCreamId = 6, // Pistachio Perfection
+                    Quantity = 2
+                },
+                new OrderLine
+                {
+                    Id = 5,
+                    OrderId = 2,
+                    IceCreamId = 7, // Tiramisu Delight
+                    Quantity = 1
+                },
+                new OrderLine
+                {
+                    Id = 6,
+                    OrderId = 2,
+                    IceCreamId = 10, // Chocolate Hazelnut
+                    Quantity = 2
+                }
+            );
+
     }
 }

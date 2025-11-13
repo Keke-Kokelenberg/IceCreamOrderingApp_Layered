@@ -1,0 +1,21 @@
+@page "/Orders"
+
+@using Microsoft.AspNetCore.Authorization
+
+@attribute [Authorize]
+
+<h1>Orders</h1>
+
+@if (OrdersList.Count == 0)
+{
+    <p>@_message</p>
+}
+else
+{
+    <ul>
+        @foreach (var order in OrdersList)
+        {
+            <li>@order.Id, @order.OrderDate</li>
+        }
+    </ul>
+}
