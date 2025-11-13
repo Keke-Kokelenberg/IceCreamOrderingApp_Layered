@@ -12,10 +12,34 @@
 }
 else
 {
-    <ul>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Items</th>
+            <th>Total Price</th>
+            <th>Vendor</th>
+            <th>Order Date</th>
+        </tr>
+        </thead>
+        <tbody>
         @foreach (var order in OrdersList)
         {
-            <li>@order.Id, @order.OrderDate</li>
+            <tr>
+                <td><a href="/OrderDetails/@order.Id">@order.Id</a></td>
+                <td>
+                    <ul>
+                        @foreach (var item in order.OrderLines)
+                        {
+                            <li>@item.IceCream.Name, @item.Quantity*</li>
+                        }
+                    </ul>
+                </td>
+                <td>@order.TotalPrice €</td>
+                <td>@order.Vendor</td>
+                <td>@order.OrderDate</td>
+            </tr>
         }
-    </ul>
+        </tbody>
+    </table>
 }
