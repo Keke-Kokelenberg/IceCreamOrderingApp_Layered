@@ -1,0 +1,38 @@
+@page "/OrderDetails/{Id:int}"
+
+@using Microsoft.AspNetCore.Authorization
+
+@attribute [Authorize]
+
+<h1>Order Details</h1>
+
+@if (Order is null)
+{
+    <p>@_message</p>
+}
+else
+{
+    <h2>ID: @Order.Id</h2>
+    <p>Vendor: @Order.Vendor.Name</p>
+    <p>Total price: @Order.TotalPrice €</p>
+    <p>Order date: @Order.OrderDate</p>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Order.OrderLines)
+        {
+            <tr>
+                <td>@item.IceCream.Name</td>
+                <td>@item.Quantity</td>
+                <td>@item.TotalPrice €</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}

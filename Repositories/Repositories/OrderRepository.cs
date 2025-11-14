@@ -21,4 +21,12 @@ public class OrderRepository: IOrderRepository
             .ThenInclude(ol => ol.IceCream)
             .ToListAsync();
     }
+
+    public async Task<Order?> GetOrderByIdAsync(int id)
+    {
+        return await _context.Orders
+            .Include(o => o.OrderLines)
+            .Include(o => o.Vendor)
+            .FirstOrDefaultAsync(o => o.Id == id);
+    }
 }
