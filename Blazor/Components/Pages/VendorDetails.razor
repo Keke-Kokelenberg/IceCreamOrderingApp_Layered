@@ -26,17 +26,34 @@ else
             <tr>
                 <th>Flavor</th>
                 <th>Price</th>
+                <th>Order Quantity</th>
+                <th>Total</th>
             </tr>
             </thead>
             <tbody>
-            @foreach (var flavor in Vendor.IceCreamFlavors)
+            @for(int i = 0; i < Vendor.IceCreamFlavors.Count; i++)
             {
+                var localCounter = i;
                 <tr>
-                    <td>@flavor.Name</td>
-                    <td>@flavor.Price €</td>
+                    <td>@Vendor.IceCreamFlavors[i].Name</td>
+                    <td>@Vendor.IceCreamFlavors[i].Price €</td>
+                    <td>
+                        <a @onclick="@(() => DecreaseOrderAmount(localCounter))" class="btn btn-secondary">-</a>
+                        @_orderLines[i].Quantity
+                        <a @onclick="@(() => IncreaseOrderAmount(localCounter))" class="btn btn-secondary">+</a>
+                    </td>
+                    <td>@(_orderLines[i].TotalPrice) €</td>
                 </tr>
             }
             </tbody>
+            <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>@_orderLines.Sum(x => x.TotalPrice) €</td>
+            </tr>
+            </tfoot>
         </table>
     }
     <br/>
