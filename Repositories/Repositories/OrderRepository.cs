@@ -29,4 +29,12 @@ public class OrderRepository: IOrderRepository
             .Include(o => o.Vendor)
             .FirstOrDefaultAsync(o => o.Id == id);
     }
+
+    public async Task AddAsync(Order order)
+    {
+        Console.WriteLine("Adding order in Repository Layer...");
+        _context.Orders.Add(order);
+        await _context.SaveChangesAsync();
+        Console.WriteLine($"Order added successfully.");
+    }
 }

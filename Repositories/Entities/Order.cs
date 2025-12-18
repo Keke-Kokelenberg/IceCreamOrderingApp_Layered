@@ -13,8 +13,8 @@ public class Order
     
     public int VendorId { get; set; }
     public Vendor Vendor { get; set; }
-    
-    public List<OrderLine> OrderLines { get; set; }
+
+    public List<OrderLine> OrderLines { get; set; } = new List<OrderLine>();
     
     public decimal TotalPrice
     {

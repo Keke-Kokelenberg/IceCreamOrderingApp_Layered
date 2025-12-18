@@ -1,4 +1,4 @@
-namespace Blazor.Models;
+namespace Services.Models;
 
 public class OrderLineVM
 {

@@ -1,7 +1,10 @@
-using Blazor.Models;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Repositories.Entities;
 using Services;
+using Services.Models;
 
 namespace Blazor.Components.Pages;
 
@@ -12,8 +15,16 @@ public partial class VendorDetails : ComponentBase
     
     [Inject]
     public IVendorService VendorService { get; set; }
+    
+    [Inject]
+    public IOrderService OrderService { get; set; }
+    
+    [Inject]
+    public AuthenticationStateProvider AuthenticationStateProvider { get; set; }
 
     public Vendor? Vendor;
+
+    private string? _userId;
     
     private string _message = "Retrieving vendor details...";
     
@@ -24,6 +35,8 @@ public partial class VendorDetails : ComponentBase
         try
         {
             Vendor = await VendorService.GetVendorByIdAsync(Id);
+            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            _userId = authState.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         }
         catch (Exception e)
         {
@@ -53,5 +66,17 @@ public partial class VendorDetails : ComponentBase
     private void IncreaseOrderAmount(int index)
     {
         _orderLines[index].Quantity++;
+    }
+    
+    [Authorize]
+    private void PlaceOrder()
+    {
+        Console.WriteLine("Placing order...");
+        if (_userId == null)
+        {
+            Console.WriteLine("User ID not found.");
+            return;
+        }
+        OrderService.PlaceOrder(_userId, Vendor.Id, _orderLines);
     }
 }
