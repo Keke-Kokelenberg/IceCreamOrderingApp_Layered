@@ -21,6 +21,9 @@ public partial class VendorDetails : ComponentBase
     
     [Inject]
     public AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+    
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
 
     public Vendor? Vendor;
 
@@ -69,14 +72,22 @@ public partial class VendorDetails : ComponentBase
     }
     
     [Authorize]
-    private void PlaceOrder()
+    private async Task PlaceOrder()
     {
-        Console.WriteLine("Placing order...");
+        // Sanity check if user is logged in
         if (_userId == null)
         {
             Console.WriteLine("User ID not found.");
             return;
         }
-        OrderService.PlaceOrder(_userId, Vendor.Id, _orderLines);
+        
+        // Remove empty order lines
+        var orderLines = _orderLines.Where(orderLine => orderLine.Quantity > 0).ToList();
+        
+        // Place order
+        await OrderService.PlaceOrder(_userId, Vendor.Id, orderLines);
+        
+        // Redirect to orders page
+        NavigationManager.NavigateTo("/Orders");
     }
 }

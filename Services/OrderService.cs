@@ -27,7 +27,7 @@ public class OrderService : IOrderService
 
     public async Task PlaceOrder(string userId, int vendorId, List<OrderLineVM> orderLines)
     {
-        //Check if vendor & user exist & all order lines are valid
+        //Check if vendor exists & all order lines are valid
         var vendor = await _vendorService.GetVendorByIdAsync(vendorId);
         if (vendor == null)
         {
@@ -39,6 +39,7 @@ public class OrderService : IOrderService
             throw new Exception("No order lines were provided.");
         }
 
+        // All ordered items must be from the same vendor
         foreach (var orderLine in orderLines)
         {
             bool isValid = false;
