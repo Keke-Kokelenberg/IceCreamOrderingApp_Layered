@@ -17,6 +17,7 @@ public class OrderRepository: IOrderRepository
     {
         return await _context.Orders
             .Where(o => o.UserId == userId)
+            .Include(o => o.Vendor)
             .Include(o => o.OrderLines)
             .ThenInclude(ol => ol.IceCream)
             .ToListAsync();

@@ -29,6 +29,8 @@ public partial class VendorDetails : ComponentBase
     public Vendor? Vendor;
 
     private string? _userId;
+
+    private bool _somethingWentWrong = false;
     
     private string _message = "Retrieving vendor details...";
     
@@ -78,12 +80,19 @@ public partial class VendorDetails : ComponentBase
         // Sanity check if user is logged in
         if (_userId == null)
         {
-            Console.WriteLine("User ID not found.");
+            _somethingWentWrong = true;
+            _message = "You must be logged in to place an order.";
             return;
         }
         
         // Remove empty order lines
         var orderLines = _orderLines.Where(orderLine => orderLine.Quantity > 0).ToList();
+        if (orderLines.Count == 0)
+        {
+            _somethingWentWrong = true;
+            _message = "You must order at least one item.";
+            return;
+        }
         
         // Place order
         await OrderService.PlaceOrder(_userId, Vendor.Id, orderLines);

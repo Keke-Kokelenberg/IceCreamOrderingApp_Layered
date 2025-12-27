@@ -67,4 +67,8 @@ else
     {
         <a @onclick="GoToLogin" class="btn btn-primary">Login to order</a>
     }
+    @if (_somethingWentWrong)
+    {
+        <p class="text-danger">@_message</p>
+    }
 }
