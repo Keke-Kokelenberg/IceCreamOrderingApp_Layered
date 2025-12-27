@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using Blazor.Components.Account.Pages;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -89,5 +90,10 @@ public partial class VendorDetails : ComponentBase
         
         // Redirect to orders page
         NavigationManager.NavigateTo("/Orders");
+    }
+
+    private void GoToLogin()
+    {
+        NavigationManager.NavigateTo("Account/Login", true);
     }
 }
